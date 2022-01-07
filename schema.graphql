@@ -1,41 +1,8 @@
-type DepositTransferred @entity {
-  id: ID!
-  tokenId: BigInt! # uint256
-  oldOwner: Bytes! # address
-  newOwner: Bytes! # address
-}
-
-type IncentiveCreated @entity {
-  id: ID!
-  rewardToken: Bytes! # address
-  pool: Bytes! # address
-  startTime: BigInt! # uint256
-  endTime: BigInt! # uint256
-  refundee: Bytes! # address
-  reward: BigInt! # uint256
-}
-
-type IncentiveEnded @entity {
-  id: ID!
-  incentiveId: Bytes! # bytes32
-  refund: BigInt! # uint256
-}
-
-type RewardClaimed @entity {
-  id: ID!
-  to: Bytes! # address
-  reward: BigInt! # uint256
-}
-
-type TokenStaked @entity {
-  id: ID!
-  tokenId: BigInt! # uint256
-  incentiveId: Bytes! # bytes32
-  liquidity: BigInt! # uint128
-}
-
-type TokenUnstaked @entity {
-  id: ID!
-  tokenId: BigInt! # uint256
-  incentiveId: Bytes! # bytes32
+type Incentive @entity {
+  id : ID!
+  startTime : BigInt!
+  endTime : BigInt!
+  address : String!
+  reward : BigInt!
+  
 }
