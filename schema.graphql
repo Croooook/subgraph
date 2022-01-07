@@ -1,10 +1,10 @@
-type Incentive @entity {
+type IncentiveCreated @entity {
   id : ID!
-  rewardToken : String!
-  pool : String!
+  rewardToken : Bytes!
+  pool : Bytes!
   startTime : BigInt!
   endTime : BigInt!
-  address : String!
+  refundee : Bytes!
   reward : BigInt!
 
 }

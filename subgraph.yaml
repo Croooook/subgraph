@@ -14,26 +14,13 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - DepositTransferred
-        - IncentiveCreated
-        - IncentiveEnded
-        - RewardClaimed
-        - TokenStaked
-        - TokenUnstaked
+        - Incentive
       abis:
         - name: Staker
           file: ./abis/Staker.json
       eventHandlers:
-        - event: DepositTransferred(indexed uint256,indexed address,indexed address)
-          handler: handleDepositTransferred
+        
         - event: IncentiveCreated(indexed address,indexed address,uint256,uint256,address,uint256)
           handler: handleIncentiveCreated
-        - event: IncentiveEnded(indexed bytes32,uint256)
-          handler: handleIncentiveEnded
-        - event: RewardClaimed(indexed address,uint256)
-          handler: handleRewardClaimed
-        - event: TokenStaked(indexed uint256,indexed bytes32,uint128)
-          handler: handleTokenStaked
-        - event: TokenUnstaked(indexed uint256,indexed bytes32)
-          handler: handleTokenUnstaked
+      
       file: ./src/mapping.ts

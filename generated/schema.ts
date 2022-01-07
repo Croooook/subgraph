@@ -11,34 +11,36 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class Incentive extends Entity {
+export class IncentiveCreated extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
 
-    this.set("rewardToken", Value.fromString(""));
-    this.set("pool", Value.fromString(""));
+    this.set("rewardToken", Value.fromBytes(Bytes.empty()));
+    this.set("pool", Value.fromBytes(Bytes.empty()));
     this.set("startTime", Value.fromBigInt(BigInt.zero()));
     this.set("endTime", Value.fromBigInt(BigInt.zero()));
-    this.set("address", Value.fromString(""));
+    this.set("refundee", Value.fromBytes(Bytes.empty()));
     this.set("reward", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save Incentive entity without an ID");
+    assert(id != null, "Cannot save IncentiveCreated entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        "Cannot save Incentive entity with non-string ID. " +
+        "Cannot save IncentiveCreated entity with non-string ID. " +
           'Considering using .toHex() to convert the "id" to a string.'
       );
-      store.set("Incentive", id.toString(), this);
+      store.set("IncentiveCreated", id.toString(), this);
     }
   }
 
-  static load(id: string): Incentive | null {
-    return changetype<Incentive | null>(store.get("Incentive", id));
+  static load(id: string): IncentiveCreated | null {
+    return changetype<IncentiveCreated | null>(
+      store.get("IncentiveCreated", id)
+    );
   }
 
   get id(): string {
@@ -50,22 +52,22 @@ export class Incentive extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get rewardToken(): string {
+  get rewardToken(): Bytes {
     let value = this.get("rewardToken");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set rewardToken(value: string) {
-    this.set("rewardToken", Value.fromString(value));
+  set rewardToken(value: Bytes) {
+    this.set("rewardToken", Value.fromBytes(value));
   }
 
-  get pool(): string {
+  get pool(): Bytes {
     let value = this.get("pool");
-    return value!.toString();
+    return value!.toBytes();
   }
 
-  set pool(value: string) {
-    this.set("pool", Value.fromString(value));
+  set pool(value: Bytes) {
+    this.set("pool", Value.fromBytes(value));
   }
 
   get startTime(): BigInt {
@@ -86,13 +88,13 @@ export class Incentive extends Entity {
     this.set("endTime", Value.fromBigInt(value));
   }
 
-  get address(): string {
-    let value = this.get("address");
-    return value!.toString();
+  get refundee(): Bytes {
+    let value = this.get("refundee");
+    return value!.toBytes();
   }
 
-  set address(value: string) {
-    this.set("address", Value.fromString(value));
+  set refundee(value: Bytes) {
+    this.set("refundee", Value.fromBytes(value));
   }
 
   get reward(): BigInt {
