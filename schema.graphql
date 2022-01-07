@@ -1,8 +1,10 @@
 type Incentive @entity {
   id : ID!
+  rewardToken : String!
+  pool : String!
   startTime : BigInt!
   endTime : BigInt!
   address : String!
   reward : BigInt!
-  
+
 }
