@@ -1,16 +1,16 @@
 {
-  "name": "instadappg1",
+  "name": "uniswapv3staker",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ croooook/instadappg1",
-    "create-local": "graph create --node http://localhost:8020/ croooook/instadappg1",
-    "remove-local": "graph remove --node http://localhost:8020/ croooook/instadappg1",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 croooook/instadappg1"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ InstadappHQ/uniswapv3staker",
+    "create-local": "graph create --node http://localhost:8020/ InstadappHQ/uniswapv3staker",
+    "remove-local": "graph remove --node http://localhost:8020/ InstadappHQ/uniswapv3staker",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 InstadappHQ/uniswapv3staker"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.25.1",
+    "@graphprotocol/graph-cli": "0.25.2",
     "@graphprotocol/graph-ts": "0.24.1"
   }
 }
