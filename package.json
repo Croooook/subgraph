@@ -1,13 +1,13 @@
 {
-  "name": "uniswapv3staker",
+  "name": "uniswapv3-staker",
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ InstadappHQ/uniswapv3staker",
-    "create-local": "graph create --node http://localhost:8020/ InstadappHQ/uniswapv3staker",
-    "remove-local": "graph remove --node http://localhost:8020/ InstadappHQ/uniswapv3staker",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 InstadappHQ/uniswapv3staker"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ InstadappHQ/uniswapv3-staker",
+    "create-local": "graph create --node http://localhost:8020/ InstadappHQ/uniswapv3-staker",
+    "remove-local": "graph remove --node http://localhost:8020/ InstadappHQ/uniswapv3-staker",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 InstadappHQ/uniswapv3-staker"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.25.2",
