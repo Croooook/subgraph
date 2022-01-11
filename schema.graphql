@@ -6,4 +6,4 @@ type IncentiveCreated @entity {
   endTime : BigInt!
   refundee : Bytes!
   reward : BigInt!
-}
+} 
