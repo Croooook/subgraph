@@ -7,3 +7,17 @@ type IncentiveCreated @entity {
   refundee : Bytes!
   reward : BigInt!
 } 
+
+type TokenStaked @entity{
+  id : ID!
+  tokenId : BigInt!
+  incentiveId : Bytes!
+  liquidity : BigInt !
+}
+
+type TokenUnstaked @entity{
+  id : ID!
+  tokenId : BigInt!
+  incentiveId : Bytes!
+
+}
