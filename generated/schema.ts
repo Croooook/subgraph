@@ -107,6 +107,60 @@ export class IncentiveCreated extends Entity {
   }
 }
 
+export class IncentiveEnded extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("incentiveId", Value.fromBytes(Bytes.empty()));
+    this.set("refund", Value.fromBigInt(BigInt.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save IncentiveEnded entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save IncentiveEnded entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("IncentiveEnded", id.toString(), this);
+    }
+  }
+
+  static load(id: string): IncentiveEnded | null {
+    return changetype<IncentiveEnded | null>(store.get("IncentiveEnded", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get incentiveId(): Bytes {
+    let value = this.get("incentiveId");
+    return value!.toBytes();
+  }
+
+  set incentiveId(value: Bytes) {
+    this.set("incentiveId", Value.fromBytes(value));
+  }
+
+  get refund(): BigInt {
+    let value = this.get("refund");
+    return value!.toBigInt();
+  }
+
+  set refund(value: BigInt) {
+    this.set("refund", Value.fromBigInt(value));
+  }
+}
+
 export class TokenStaked extends Entity {
   constructor(id: string) {
     super();

@@ -8,6 +8,12 @@ type IncentiveCreated @entity {
   reward : BigInt!
 } 
 
+type IncentiveEnded @entity {
+  id : ID!
+  incentiveId : Bytes!
+  refund : BigInt!
+}
+
 type TokenStaked @entity{
   id : ID!
   tokenId : BigInt!

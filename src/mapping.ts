@@ -11,6 +11,9 @@ import {
 import {
   
   IncentiveCreated,
+  IncentiveEnded,
+  TokenStaked,
+  TokenUnstaked,
  
   
 } from "../generated/schema"
