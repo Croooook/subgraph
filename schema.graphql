@@ -6,6 +6,7 @@ type IncentiveCreated @entity {
   endTime : BigInt!
   refundee : Bytes!
   reward : BigInt!
+  stakedTokenId : [TokenStaked!]! @derivedFrom (field : "incentiveId")
 } 
 
 type IncentiveEnded @entity {
@@ -17,7 +18,7 @@ type IncentiveEnded @entity {
 type TokenStaked @entity{
   id : ID!
   tokenId : BigInt!
-  incentiveId : Bytes!
+  incentiveId : IncentiveCreated
   liquidity : BigInt !
 }
 

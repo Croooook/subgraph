@@ -33,5 +33,36 @@ export function handleIncentiveCreated(event: IncentiveCreatedEvent): void {
   entity.save()
 }
 
+export function handleIncentiveEnded(event: IncentiveEndedEvent): void {
+  let entity = new IncentiveEnded(
+    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
+  )
+  entity.incentiveId = event.params.incentiveId
+  entity.refund = event.params.refund
+  entity.save()
+}
 
+export function handleTokenStaked(event: TokenStakedEvent): void {
+  let entity = new TokenStaked(
+    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
+  )
+  entity.tokenId = event.params.tokenId
+  let incentiveCreated = IncentiveCreated.load(event.params.incentiveId.toString())
+if (!incentiveCreated){
+  incentiveCreated = new IncentiveCreated (event.params.incentiveId.toString())
+}
+//If incentiveId isn't unique, you may need to concat with event.logIndex.toString()
+entity.incentiveId = incentiveCreated.id
+  entity.liquidity = event.params.liquidity
+  entity.save()
+}
+
+export function handleTokenUnstaked(event: TokenUnstakedEvent): void {
+  let entity = new TokenUnstaked(
+    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
+  )
+  entity.tokenId = event.params.tokenId
+  entity.incentiveId = event.params.incentiveId
+  entity.save()
+}
 

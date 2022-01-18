@@ -105,6 +105,15 @@ export class IncentiveCreated extends Entity {
   set reward(value: BigInt) {
     this.set("reward", Value.fromBigInt(value));
   }
+
+  get stakedTokenId(): Array<string> {
+    let value = this.get("stakedTokenId");
+    return value!.toStringArray();
+  }
+
+  set stakedTokenId(value: Array<string>) {
+    this.set("stakedTokenId", Value.fromStringArray(value));
+  }
 }
 
 export class IncentiveEnded extends Entity {
@@ -167,7 +176,6 @@ export class TokenStaked extends Entity {
     this.set("id", Value.fromString(id));
 
     this.set("tokenId", Value.fromBigInt(BigInt.zero()));
-    this.set("incentiveId", Value.fromBytes(Bytes.empty()));
     this.set("liquidity", Value.fromBigInt(BigInt.zero()));
   }
 
@@ -206,13 +214,21 @@ export class TokenStaked extends Entity {
     this.set("tokenId", Value.fromBigInt(value));
   }
 
-  get incentiveId(): Bytes {
+  get incentiveId(): string | null {
     let value = this.get("incentiveId");
-    return value!.toBytes();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set incentiveId(value: Bytes) {
-    this.set("incentiveId", Value.fromBytes(value));
+  set incentiveId(value: string | null) {
+    if (!value) {
+      this.unset("incentiveId");
+    } else {
+      this.set("incentiveId", Value.fromString(<string>value));
+    }
   }
 
   get liquidity(): BigInt {
