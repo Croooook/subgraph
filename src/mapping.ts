@@ -8,7 +8,7 @@ import {
   RewardClaimed as RewardClaimedEvent,
   TokenStaked as TokenStakedEvent,
   TokenUnstaked as TokenUnstakedEvent
-} from "../generated/uniswapv3staker/uniswapv3staker"
+} from "../generated/Contract/Contract"
 
 import {
   
