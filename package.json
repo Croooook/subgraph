@@ -4,13 +4,13 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ InstadappHQ/uniswapv3-staker",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ instadapp/uniswap-v3-staker",
     "create-local": "graph create --node http://localhost:8020/ InstadappHQ/uniswapv3-staker",
     "remove-local": "graph remove --node http://localhost:8020/ InstadappHQ/uniswapv3-staker",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 InstadappHQ/uniswapv3-staker"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.25.2",
-    "@graphprotocol/graph-ts": "0.24.1"
+    "@graphprotocol/graph-cli": "^0.26.0",
+    "@graphprotocol/graph-ts": "^0.24.1"
   }
 }
