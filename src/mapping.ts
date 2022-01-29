@@ -56,11 +56,12 @@ export function handleTokenStaked(event: TokenStakedEvent): void {
   if (!incentiveCreated){
     incentiveCreated = new IncentiveCreated (event.params.incentiveId.toString())
   }
-
+  incentiveCreated.save()
   //If incentiveId isn't unique, you may need to concat with event.logIndex.toString()
   entity.incentiveId = incentiveCreated.id
   entity.liquidity = event.params.liquidity
   entity.save()
+  
 }
 
 export function handleTokenUnstaked(event: TokenUnstakedEvent): void {
