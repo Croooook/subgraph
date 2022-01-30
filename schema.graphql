@@ -28,3 +28,10 @@ type TokenUnstaked @entity{
   incentiveId : Bytes!
 
 }
+
+type DepositTransferred @entity {
+  id: ID!
+  tokenId: BigInt! 
+  oldOwner: Bytes! 
+  newOwner: Bytes! 
+}

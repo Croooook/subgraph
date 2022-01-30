@@ -20,6 +20,7 @@ dataSources:
         - RewardClaimed
         - TokenStaked
         - TokenUnstaked
+        - DepositTransferred
       abis:
         - name: uniswapv3staker
           file: ./abis/uniswapv3staker.json
@@ -33,5 +34,7 @@ dataSources:
           handler: handleTokenStaked
         - event: TokenUnstaked(indexed uint256,indexed bytes32)
           handler: handleTokenUnstaked
+        - event: DepositTransferred(indexed uint256,indexed address,indexed address)
+          handler: handleDepositTransferred
         
       file: ./src/mapping.ts

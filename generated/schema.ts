@@ -294,3 +294,69 @@ export class TokenUnstaked extends Entity {
     this.set("incentiveId", Value.fromBytes(value));
   }
 }
+
+export class DepositTransferred extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("tokenId", Value.fromBigInt(BigInt.zero()));
+    this.set("oldOwner", Value.fromBytes(Bytes.empty()));
+    this.set("newOwner", Value.fromBytes(Bytes.empty()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save DepositTransferred entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save DepositTransferred entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("DepositTransferred", id.toString(), this);
+    }
+  }
+
+  static load(id: string): DepositTransferred | null {
+    return changetype<DepositTransferred | null>(
+      store.get("DepositTransferred", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get tokenId(): BigInt {
+    let value = this.get("tokenId");
+    return value!.toBigInt();
+  }
+
+  set tokenId(value: BigInt) {
+    this.set("tokenId", Value.fromBigInt(value));
+  }
+
+  get oldOwner(): Bytes {
+    let value = this.get("oldOwner");
+    return value!.toBytes();
+  }
+
+  set oldOwner(value: Bytes) {
+    this.set("oldOwner", Value.fromBytes(value));
+  }
+
+  get newOwner(): Bytes {
+    let value = this.get("newOwner");
+    return value!.toBytes();
+  }
+
+  set newOwner(value: Bytes) {
+    this.set("newOwner", Value.fromBytes(value));
+  }
+}

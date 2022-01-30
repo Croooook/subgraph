@@ -11,7 +11,8 @@ import {
 } from "../generated/Contract/Contract"
 
 import {
-  
+
+  DepositTransferred,
   IncentiveCreated,
   IncentiveEnded,
   TokenStaked,
@@ -49,7 +50,7 @@ export function handleIncentiveEnded(event: IncentiveEndedEvent): void {
 
 export function handleTokenStaked(event: TokenStakedEvent): void {
   let entity = new TokenStaked(
-    event.params.incentiveId.toString()
+    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.tokenId = event.params.tokenId
   let incentiveCreated = IncentiveCreated.load(event.params.incentiveId.toString())
@@ -66,10 +67,19 @@ export function handleTokenStaked(event: TokenStakedEvent): void {
 
 export function handleTokenUnstaked(event: TokenUnstakedEvent): void {
   let entity = new TokenUnstaked(
-    event.params.incentiveId.toHexString()
+    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.tokenId = event.params.tokenId
   entity.incentiveId = event.params.incentiveId
   entity.save()
 }
 
+export function handleDepositTransferred(event: DepositTransferredEvent): void {
+  let entity = new DepositTransferred(
+    event.transaction.hash.toHex() + "-" + event.logIndex.toString()
+  )
+  entity.tokenId = event.params.tokenId
+  entity.oldOwner = event.params.oldOwner
+  entity.newOwner = event.params.newOwner
+  entity.save()
+}
