@@ -53,9 +53,9 @@ export function handleTokenStaked(event: TokenStakedEvent): void {
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.tokenId = event.params.tokenId
-  let incentiveCreated = IncentiveCreated.load(event.params.incentiveId.toString())
+  let incentiveCreated = IncentiveCreated.load(event.params.incentiveId.toHex())
   if (!incentiveCreated){
-    incentiveCreated = new IncentiveCreated (event.params.incentiveId.toString())
+    incentiveCreated = new IncentiveCreated (event.params.incentiveId.toHex())
   }
   incentiveCreated.save()
   //If incentiveId isn't unique, you may need to concat with event.logIndex.toString()
