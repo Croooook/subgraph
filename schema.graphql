@@ -7,11 +7,12 @@ type IncentiveCreated @entity {
   refundee : Bytes!
   reward : BigInt!
   stakedTokenId : [TokenStaked!]! @derivedFrom (field : "incentiveId")
+  status : [IncentiveEnded!]! @derivedFrom (field: "incentiveId")
 } 
 
 type IncentiveEnded @entity {
   id : ID!
-  incentiveId : Bytes!
+  incentiveId : IncentiveCreated
   refund : BigInt!
 }
 
