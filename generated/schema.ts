@@ -115,13 +115,13 @@ export class IncentiveCreated extends Entity {
     this.set("stakedTokenId", Value.fromStringArray(value));
   }
 
-  get status(): Array<string> {
+  get status(): boolean {
     let value = this.get("status");
-    return value!.toStringArray();
+    return value!.toBoolean();
   }
 
-  set status(value: Array<string>) {
-    this.set("status", Value.fromStringArray(value));
+  set status(value: boolean) {
+    this.set("status", Value.fromBoolean(value));
   }
 }
 
@@ -130,6 +130,7 @@ export class IncentiveEnded extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
+    this.set("incentiveId", Value.fromBytes(Bytes.empty()));
     this.set("refund", Value.fromBigInt(BigInt.zero()));
   }
 
@@ -159,21 +160,13 @@ export class IncentiveEnded extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get incentiveId(): string | null {
+  get incentiveId(): Bytes {
     let value = this.get("incentiveId");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
+    return value!.toBytes();
   }
 
-  set incentiveId(value: string | null) {
-    if (!value) {
-      this.unset("incentiveId");
-    } else {
-      this.set("incentiveId", Value.fromString(<string>value));
-    }
+  set incentiveId(value: Bytes) {
+    this.set("incentiveId", Value.fromBytes(value));
   }
 
   get refund(): BigInt {

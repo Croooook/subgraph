@@ -44,13 +44,7 @@ export function handleIncentiveCreated(event: IncentiveCreatedEvent): void {
 
 export function handleIncentiveEnded(event: IncentiveEndedEvent): void {
   let entity = new IncentiveEnded(event.params.incentiveId.toHexString())
-  let incentiveCreated = IncentiveCreated.load(event.params.incentiveId.toHex())
-  if (!incentiveCreated){
-    incentiveCreated = new IncentiveCreated (event.params.incentiveId.toHex())
-  }
-  incentiveCreated.save()
-  //If incentiveId isn't unique, you may need to concat with event.logIndex.toString()
-  entity.incentiveId = incentiveCreated.id
+ 
   entity.refund = event.params.refund
   entity.save()
 }
