@@ -39,13 +39,15 @@ export function handleIncentiveCreated(event: IncentiveCreatedEvent): void {
   entity.endTime = event.params.endTime
   entity.refundee = event.params.refundee
   entity.reward = event.params.reward
+  
   entity.save()
 }
 
 export function handleIncentiveEnded(event: IncentiveEndedEvent): void {
   let entity = new IncentiveEnded(event.params.incentiveId.toHexString())
- 
+  
   entity.refund = event.params.refund
+  
   entity.save()
 }
 
