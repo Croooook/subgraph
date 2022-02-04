@@ -13,8 +13,8 @@ import {
 import {
 
   DepositTransferred,
-  IncentiveCreated,
-  IncentiveEnded,
+  Incentive,
+  
   TokenStaked,
   TokenUnstaked,
  
@@ -32,7 +32,7 @@ export function handleIncentiveCreated(event: IncentiveCreatedEvent): void {
 
   let id = crypto.keccak256(encoded)
 
-  let entity = new IncentiveCreated(id.toHexString())
+  let entity = new Incentive(id.toHexString())
   entity.rewardToken = event.params.rewardToken
   entity.pool = event.params.pool
   entity.startTime = event.params.startTime
@@ -44,7 +44,7 @@ export function handleIncentiveCreated(event: IncentiveCreatedEvent): void {
 }
 
 export function handleIncentiveEnded(event: IncentiveEndedEvent): void {
-  let entity = new IncentiveCreated(event.params.incentiveId.toHexString())
+  let entity = new Incentive(event.params.incentiveId.toHexString())
   
   
   if (entity != null) {
@@ -59,9 +59,9 @@ export function handleTokenStaked(event: TokenStakedEvent): void {
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.tokenId = event.params.tokenId
-  let incentiveCreated = IncentiveCreated.load(event.params.incentiveId.toHex())
+  let incentiveCreated = Incentive.load(event.params.incentiveId.toHex())
   if (!incentiveCreated){
-    incentiveCreated = new IncentiveCreated (event.params.incentiveId.toHex())
+    incentiveCreated = new Incentive (event.params.incentiveId.toHex())
   }
   incentiveCreated.save()
   //If incentiveId isn't unique, you may need to concat with event.logIndex.toString()
