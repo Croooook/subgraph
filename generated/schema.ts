@@ -115,13 +115,13 @@ export class IncentiveCreated extends Entity {
     this.set("stakedTokenId", Value.fromStringArray(value));
   }
 
-  get status(): boolean {
-    let value = this.get("status");
+  get active(): boolean {
+    let value = this.get("active");
     return value!.toBoolean();
   }
 
-  set status(value: boolean) {
-    this.set("status", Value.fromBoolean(value));
+  set active(value: boolean) {
+    this.set("active", Value.fromBoolean(value));
   }
 }
 

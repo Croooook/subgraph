@@ -39,16 +39,19 @@ export function handleIncentiveCreated(event: IncentiveCreatedEvent): void {
   entity.endTime = event.params.endTime
   entity.refundee = event.params.refundee
   entity.reward = event.params.reward
-  
+  entity.active = true;
   entity.save()
 }
 
 export function handleIncentiveEnded(event: IncentiveEndedEvent): void {
-  let entity = new IncentiveEnded(event.params.incentiveId.toHexString())
+  let entity = new IncentiveCreated(event.params.incentiveId.toHexString())
   
-  entity.refund = event.params.refund
   
-  entity.save()
+  if (entity != null) {
+    entity.active = false;
+    entity.save();
+  }
+  
 }
 
 export function handleTokenStaked(event: TokenStakedEvent): void {
