@@ -1,4 +1,4 @@
-type IncentiveCreated @entity {
+type Incentive @entity {
   id : ID!
   rewardToken : Bytes!
   pool : Bytes!
@@ -10,18 +10,12 @@ type IncentiveCreated @entity {
   active : Boolean!
 } 
 
-type IncentiveEnded @entity {
-  id : ID!
-  incentiveId : Bytes!
-  refund : BigInt!
-  
-  
-}
+
 
 type TokenStaked @entity{
   id : ID!
   tokenId : BigInt!
-  incentiveId : IncentiveCreated
+  incentiveId : Incentive
   liquidity : BigInt !
 }
 
