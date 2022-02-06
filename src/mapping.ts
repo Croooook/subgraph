@@ -44,7 +44,7 @@ export function handleIncentiveCreated(event: IncentiveCreatedEvent): void {
 }
 
 export function handleIncentiveEnded(event: IncentiveEndedEvent): void {
-  let entity = new Incentive(event.params.incentiveId.toHexString())
+  let entity = Incentive.load(event.params.incentiveId.toHexString())
   
   
   if (entity != null) {
