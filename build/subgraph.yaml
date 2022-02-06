@@ -1,0 +1,38 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: uniswapv3staker
+    network: matic
+    source:
+      address: "0xe34139463bA50bD61336E0c446Bd8C0867c6fE65"
+      abi: uniswapv3staker
+      startBlock: 22760705
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - DepositTransferred
+        - IncentiveCreated
+        - IncentiveEnded
+        - RewardClaimed
+        - TokenStaked
+        - TokenUnstaked
+        - DepositTransferred
+      abis:
+        - name: uniswapv3staker
+          file: uniswapv3staker/abis/uniswapv3staker.json
+      eventHandlers:
+        - event: IncentiveCreated(indexed address,indexed address,uint256,uint256,address,uint256)
+          handler: handleIncentiveCreated
+        - event: IncentiveEnded(indexed bytes32,uint256)
+          handler: handleIncentiveEnded
+        - event: TokenStaked(indexed uint256,indexed bytes32,uint128)
+          handler: handleTokenStaked
+        - event: TokenUnstaked(indexed uint256,indexed bytes32)
+          handler: handleTokenUnstaked
+        - event: DepositTransferred(indexed uint256,indexed address,indexed address)
+          handler: handleDepositTransferred
+      file: uniswapv3staker/uniswapv3staker.wasm
